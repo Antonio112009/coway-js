@@ -1,6 +1,6 @@
 {
   "name": "coway-js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Typed async client for Coway AIRMEGA devices through IoCare",
   "type": "module",
   "sideEffects": false,
