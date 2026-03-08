@@ -1,4 +1,4 @@
-export { VERSION } from "./version.js";
+export { VERSION } from "./constants.js";
 export { CowayClient } from "./client.js";
 export type { CowayClientOptions } from "./client.js";
 export { CommandCode, LightMode, IocareApi, SensorCode, SensorKey, TrCode } from "./constants.js";
