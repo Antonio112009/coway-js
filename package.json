@@ -1,0 +1,64 @@
+{
+  "name": "coway-js",
+  "version": "0.1.0",
+  "description": "Typed async client for Coway AIRMEGA devices through IoCare",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . && tsc --noEmit",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm run lint && npm test && npm run build"
+  },
+  "keywords": [
+    "coway",
+    "iocare",
+    "iocare api",
+    "coway api",
+    "airmega",
+    "air purifier"
+  ],
+  "author": "Antonio112009",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antonio112009/coway-js"
+  },
+  "bugs": {
+    "url": "https://github.com/antonio112009/coway-js/issues"
+  },
+  "homepage": "https://github.com/antonio112009/coway-js#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.3.5",
+    "eslint": "^10.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vitest": "^4.0.18"
+  }
+}
