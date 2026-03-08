@@ -15,18 +15,21 @@ describe("CowayClient", () => {
   it("returns empty purifiers when places are missing", async () => {
     const client = new CowayClient("user@example.com", "s3cret");
 
-    // Stub login to set up minimal state
-    vi.spyOn(client as never, "login" as never).mockResolvedValue(undefined as never);
-    // Stub getPlaces to return empty
-    vi.spyOn(client as never, "getPlaces" as never).mockResolvedValue([] as never);
-    // Ensure _checkToken doesn't make real requests
-    vi.spyOn(client as never, "_checkToken" as never).mockResolvedValue(undefined as never);
+    interface ClientInternal {
+      login: () => Promise<void>;
+      getPlaces: () => Promise<unknown[]>;
+      _checkToken: () => Promise<void>;
+      places: unknown[];
+    }
+    const c = client as unknown as ClientInternal;
 
-    // Set places to empty to trigger NoPlaces/empty path
-    (client as unknown as { places: unknown[] }).places = [];
+    vi.spyOn(c, "login").mockResolvedValue(undefined);
+    vi.spyOn(c, "getPlaces").mockResolvedValue([]);
+    vi.spyOn(c, "_checkToken").mockResolvedValue(undefined);
 
-    // The client should handle empty places gracefully
-    expect((client as unknown as { places: unknown[] }).places).toEqual([]);
+    c.places = [];
+
+    expect(c.places).toEqual([]);
   });
 });
 
@@ -34,10 +37,15 @@ describe("CowayAuthClient – _checkToken", () => {
   it("calls login when tokens are missing", async () => {
     const client = new CowayClient("user@example.com", "s3cret");
 
-    const loginSpy = vi.spyOn(client as never, "login" as never).mockResolvedValue(undefined as never);
+    interface ClientInternal {
+      login: () => Promise<void>;
+      _checkToken: () => Promise<void>;
+    }
+    const c = client as unknown as ClientInternal;
 
-    // No tokens set → should call login directly
-    await (client as unknown as { _checkToken: () => Promise<void> })._checkToken();
+    const loginSpy = vi.spyOn(c, "login").mockResolvedValue(undefined);
+
+    await c._checkToken();
 
     expect(loginSpy).toHaveBeenCalled();
   });

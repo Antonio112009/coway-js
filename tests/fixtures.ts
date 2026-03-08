@@ -1,14 +1,19 @@
 /** Shared test fixtures mirroring pycoway conftest.py */
 
+import type { PurifierDeviceSummary } from "../src/devices/models.js";
+import type { ParsedInfo } from "../src/devices/parser.js";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type JsonObject = Record<string, any>;
 
-export function sampleDevice(): JsonObject {
+export function sampleDevice(): PurifierDeviceSummary {
   return {
+    categoryName: null,
     deviceSerial: "ABC123",
-    productModel: "AIRMEGA-250S",
     dvcNick: "Living Room",
+    modelCode: "250S",
     placeId: "place-001",
+    productModel: "AIRMEGA-250S",
   };
 }
 
@@ -69,7 +74,7 @@ export function sampleAirHomeResponse(): JsonObject {
   };
 }
 
-export function sampleParsedInfo() {
+export function sampleParsedInfo(): ParsedInfo {
   return {
     deviceInfo: {
       productName: "AIRMEGA 250S",

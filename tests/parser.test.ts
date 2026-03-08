@@ -128,7 +128,7 @@ describe("buildFilterDict", () => {
     const filters = [{ supplyNm: "Pre-Filter", filterRemain: 80 }];
     const result = buildFilterDict(filters);
     expect(result["pre-filter"]).toBeDefined();
-    expect(result["pre-filter"].filterRemain).toBe(80);
+    expect(result["pre-filter"]?.filterRemain).toBe(80);
   });
 
   it("keys max2 filter correctly", () => {
@@ -157,8 +157,8 @@ describe("buildFilterDict", () => {
       { supplyNm: "Deodorization Filter", filterRemain: 40 },
     ];
     const result = buildFilterDict(filters);
-    expect(result.max2.filterRemain).toBe(50);
-    expect(result["odor-filter"].filterRemain).toBe(40);
+    expect(result.max2?.filterRemain).toBe(50);
+    expect(result["odor-filter"]?.filterRemain).toBe(40);
   });
 });
 
@@ -175,8 +175,8 @@ describe("buildFilterInfoList", () => {
         replaceCycleUnit: "W",
         lastDate: "",
         nextDate: "",
-        preFilterYn: "Y",
-        serverResetFilterYn: "Y",
+        preFilterYn: "Y" as const,
+        serverResetFilterYn: "Y" as const,
         supplyContent: "<div>Removes dust</div>",
         pollutions: [
           { pollutionNm: "Pollen" },
@@ -191,8 +191,8 @@ describe("buildFilterInfoList", () => {
         replaceCycleUnit: "M",
         lastDate: "",
         nextDate: "",
-        preFilterYn: "N",
-        serverResetFilterYn: "N",
+        preFilterYn: "N" as const,
+        serverResetFilterYn: "N" as const,
         supplyContent: "",
         pollutions: [{ pollutionNm: "VOCs" }],
       },
